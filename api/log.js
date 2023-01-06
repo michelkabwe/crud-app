@@ -41,19 +41,28 @@ router.get("/userList", (req, res) => {
 
 router.post("/register", async (req, res, next) => {
 
+  //👇🏻 Checks if there is an existing user with the same email or password
+  const { email, password} = req.body
+  console.log(email, password ,'yooooo')
+
+  if (email && password) {
+      const docRef = await db.collection('users').add({ email: email, password: password})
+
+      const usersRef = await db.collection('users').doc(docRef.id).get();
+
+      const usersData = usersRef.data();
+
   
-   
-    //👇🏻 Checks if there is an existing user with the same email or password
-  console.log(req.body.email,'bodyy parser')
-  res.send(req.body);
+      res.send({ 
+          id:docRef.id,
+          email: usersData.email
+      })
+  }
+
+
 
     
-
+ 
 });
 
-
-
-
-
 module.exports = router 
-
