@@ -3,35 +3,30 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignIn.css'
 
-const SignIn = ({setIsAuth}) => {
-    //const navigate = useNavigate();
+const Login = () => {
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         email: "",
         password: "",
-        token:""
     });
 
-    const navigate = useNavigate();
-    const handleSubmit = (e) => {
+    const handleSubmit = async  (e) => {
         e.preventDefault();
-        axios.post("https://63b4536e0f49ecf50887d537.mockapi.io/register", {
+        axios.post("http://localhost:4000/log/login", {
+                body: JSON.stringify({
                 email: values.email,
                 password: values.password,
-                token:  Math.random().toString(36).substr(2)
+            }),
             })
-            .then((res) => {
-                //Store token in Localstorage...
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('email', res.data.email)
-                localStorage.setItem('password', res.data.password)
+            .then((res) => 
+              {
+                  console.log(res)
+                  console.log(res)
+                  navigate('/Dashboard')
 
-                
-              
-              
-                    navigate("/Dashboard");
-                      
-                //setIsAuth(true);
-            })
+              }
+            )
+         
             .catch((err) => console.error(err));
     };
     return (
@@ -61,4 +56,4 @@ const SignIn = ({setIsAuth}) => {
     )
 }
 
-export default SignIn
+export default Login

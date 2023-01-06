@@ -10,19 +10,32 @@ const SignUp = () => {
     });
 
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+
+
+    const handleChange = (e) => {
+        setValues({...values, [e.target.name]: e.target.value})
+    }
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("https://63b4536e0f49ecf50887d537.mockapi.io/register", {
-                email: values.email,
-                password: values.password,
-           })
-            .then((res) => {
-            console.log(res)
-            setTimeout(() => {
-                navigate('/SignIn')
-            },2500)                       
-            })
-            .catch((err) => console.error(err));
+
+        const headers = {
+                    "Content-Type": "application/json"
+        }
+        axios.post("http://localhost:4000/log/register",values, {
+            headers:headers,
+            
+           }).then((res) =>  {
+               return console.log(res,'helllo')
+           }
+                //localStorage.setItem("username","username")
+            )
+            //.then((data) => { console.log(data)})
+           
+            //setTimeout(() => {
+                navigate('/Login')
+                console.log("signed up!")
+            //},2500)                       
+            //.catch((err) => console.error(err));
 
     };
 
@@ -37,14 +50,14 @@ const SignUp = () => {
                 <label>email
                 <input type="email"
                 name="email"
-                onChange={(e) => setValues({ ...values, email: e.target.value })}>
+                onChange={handleChange}>
                 </input>
                 </label>
 
                 <label>password
                 <input type="password"
                  name="password"
-                 onChange={(e) => setValues({ ...values, password: e.target.value })}>
+                 onChange={handleChange}>
                 </input>
                 </label>
                 <input type="submit" />
