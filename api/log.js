@@ -1,6 +1,7 @@
 
 
 const express = require('express');
+const { refreshToken } = require('firebase-admin/app');
 const router = express.Router();
 
 //hämta funktionen och anropar databasen..
@@ -46,7 +47,6 @@ router.get("/userlist", async (req, res) => {
 	try {
 		const docRef = db.collection('users')
         const snapShot = await docRef.get();
-        
 
 		if (snapShot.empty) {
 			res.status(404).send('OOPS user not found 🙁');
@@ -81,18 +81,44 @@ router.post("/register", async (req, res, next) => {
       const usersData = usersRef.data();
       res.send({ 
           id:docRef.id,
-          email: usersData.email
+          email: usersData.email,
+          password: usersData.password
       })
   }
 });
+router.post("/login", async (req, res, next) => {
+    const id = req.params.id;
+    const docRef = db.collection(id)
+
+    console.log('Looking up user', id);
+
+    try {
+        db.collection('users').doc(id).get().then((snapshot) => {
+            const userExists = snapshot.exists;
+
+            if (userExists) {
+                res.set('login succeeded');
+                return res.status(200);
+            } else {
+                return res.status(404).json({errorCode: 400, errorMessage: `User '${id}' not found`});
+            }
+        });
+    } catch(error) {
+        console.log('Error checking if user exists:', id, error.message);
+        return res.sendStatus(404);
+    }
+});
+
+
 
 // DELETE users by id   
 router.delete('/userlist/:id', async (req, res) => {
-    //const id = req.params.id;
-    const { id } = req.body.id
+    const id = req.params.id;
+    console.log(id,'iiiiiiiiiiiiiiii')
+
 
 	try {
-		const docRef = await db.collection('users').doc(id);
+		const docRef = await db.collection('users').doc(id).get();
 
 		if (!docRef.exists) {
 			res.status(404).send('OOPS id does not exist! 🙁 ' + id);
