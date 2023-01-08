@@ -6,27 +6,27 @@ import '../styles/SignIn.css'
 const Login = () => {
     const navigate = useNavigate();
     const [values, setValues] = useState({
+        id:"",
         email: "",
         password: "",
     });
 
-    const handleSubmit = async  (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:4000/log/login", {
-                body: JSON.stringify({
+        axios.post("http://localhost:4000/signin/auth", {
+                body: {
+                id: values.id,
                 email: values.email,
                 password: values.password,
-            }),
+            },
             })
             .then((res) => 
               {
-                  console.log(res)
                   console.log(res)
                   navigate('/Dashboard')
 
               }
             )
-         
             .catch((err) => console.error(err));
     };
     return (
@@ -50,6 +50,7 @@ const Login = () => {
                 ></input>
                 </label>
                 <input type="submit" />
+                <p>Not registered? Sign up here! | Forgot password?</p>
             </form>
             </div>
         </div>
