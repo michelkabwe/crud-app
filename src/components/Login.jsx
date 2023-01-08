@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignIn.css'
+
+
 
 const Login = () => {
     const navigate = useNavigate();
@@ -22,9 +25,11 @@ const Login = () => {
             })
             .then((res) => 
               {
-                  console.log(res)
-                  navigate('/Dashboard')
-
+                  let newData = res
+                  console.log(newData)
+               
+                    //const loggedUser = localStorage.getItem('user');
+                    //console.log(loggedUser)
               }
             )
             .catch((err) => console.error(err));
@@ -50,7 +55,7 @@ const Login = () => {
                 ></input>
                 </label>
                 <input type="submit" />
-                <p>Not registered? Sign up here! | Forgot password?</p>
+                <p>Not registered? <NavLink to="/SignUp">Sign up here!</NavLink> | Forgot your password?</p>
             </form>
             </div>
         </div>

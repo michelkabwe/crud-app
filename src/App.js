@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import {
-  BrowserRouter,Routes, Route
+  BrowserRouter,Routes, Route, useNavigate
 } from "react-router-dom";
 import Header from './components/Header'
 import Home from './components/Home'
@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/Login" element={<Login/>} />  
           <Route path="/SignUp" element={<SignUp/>} />
-          <Route path="/Dashboard" element={<Dashboard/>} />
+          <Route path="/Dashboard" element={<Dashboard/> } />
     </Routes>
     </div>
     </BrowserRouter>
