@@ -1,7 +1,6 @@
-
-
 const express = require('express');
 const { refreshToken } = require('firebase-admin/app');
+const { useRef } = require('react');
 const router = express.Router();
 
 //hämta funktionen och anropar databasen..
@@ -13,7 +12,6 @@ const db = getDatabase();
 //GET users by id
 router.get('/userlist/:id', async (req, res) => {
     const id = req.params.id;
-    console.log(id,'iiiiiiiid')
 
 	try {
 		const docRef = await db.collection('users').doc(id).get();
@@ -67,55 +65,37 @@ router.get("/userlist", async (req, res) => {
 });
   
 
+//hääär
 
 
-router.post("/register", async (req, res, next) => {
-
-  //👇🏻 Checks if there is an existing user with the same email or password
-  const { email, password} = req.body
-
-  if (email && password) {
-      const docRef = await db.collection('users').add({ email: email, password: password})
-
-      const usersRef = await db.collection('users').doc(docRef.id).get();
-      const usersData = usersRef.data();
-      res.send({ 
-          id:docRef.id,
-          email: usersData.email,
-          password: usersData.password
-      })
-  }
-});
-router.post("/login", async (req, res, next) => {
-    const id = req.params.id;
-    const docRef = db.collection(id)
-
-    console.log('Looking up user', id);
-
-    try {
-        db.collection('users').doc(id).get().then((snapshot) => {
-            const userExists = snapshot.exists;
-
-            if (userExists) {
-                res.set('login succeeded');
-                return res.status(200);
-            } else {
-                return res.status(404).json({errorCode: 400, errorMessage: `User '${id}' not found`});
-            }
+/*
+router.post('/login', async (req, res, next) => {
+        const object = req.body
+		const docRef = await db.collection('users').add(object);
+		const userRef = await db.collection('users').doc(docRef.id).get();
+		const userData = userRef.data();
+	try {
+		if (userRef.exists) {
+        return res.send({
+			id: docRef.id,
+			email: userData.email,
+			password: userData.password,
         });
-    } catch(error) {
-        console.log('Error checking if user exists:', id, error.message);
-        return res.sendStatus(404);
+    }  return res.status(404).json({errorCode: 400, errorMessage: `Login failed'${id}' not found`});
     }
-});
+	catch (error) {
+		console.log('An error occured. Please try again 🙁' + error.message);
+		res.status(500).send(error.message);
+	}
+        
+    
+});*/
 
 
 
 // DELETE users by id   
 router.delete('/userlist/:id', async (req, res) => {
     const id = req.params.id;
-    console.log(id,'iiiiiiiiiiiiiiii')
-
 
 	try {
 		const docRef = await db.collection('users').doc(id).get();

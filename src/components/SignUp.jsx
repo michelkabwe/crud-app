@@ -10,8 +10,6 @@ const SignUp = () => {
     });
 
     const navigate = useNavigate();
-
-
     const handleChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
@@ -21,23 +19,24 @@ const SignUp = () => {
         const headers = {
                     "Content-Type": "application/json"
         }
-        axios.post("http://localhost:4000/log/register",values, {
+        axios.post("http://localhost:4000/signup/register",values, {
             headers:headers,
             
-           }).then((res) =>  {
-               return console.log(res,'helllo')
+           })
+           .then((res) =>  {
+               if(res){
+                 //localStorage.setItem('user', JSON.stringify(values))
+                   alert("Register succeded, press OK to continue!")
+               }
            }
-                //localStorage.setItem("username","username")
             )
-            //.then((data) => { console.log(data)})
-           
-            //setTimeout(() => {
+            setTimeout(() => {
                 navigate('/Login')
-                console.log("signed up!")
-            //},2500)                       
+                //console.log("signed up!")
+            },2500)                       
             //.catch((err) => console.error(err));
-
     };
+  
 
 
     return (
