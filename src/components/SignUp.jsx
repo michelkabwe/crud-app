@@ -5,6 +5,7 @@ import '../styles/SignUp.css'
 
 const SignUp = () => {
     const [values, setValues] = useState({
+        //id:"",
         email: "",
         password: "",
     });
@@ -14,6 +15,7 @@ const SignUp = () => {
         setValues({...values, [e.target.name]: e.target.value})
     }
     const handleSubmit = async (e) => {
+        console.log("booboo")
         e.preventDefault();
 
         const headers = {
@@ -21,20 +23,21 @@ const SignUp = () => {
         }
         axios.post("http://localhost:4000/signup/register",values, {
             headers:headers,
-            
-           })
-           .then((res) =>  {
-               if(res){
-                 //localStorage.setItem('user', JSON.stringify(values))
-                   alert("Register succeded, press OK to continue!")
-               }
-           }
-            )
-            setTimeout(() => {
-                navigate('/Login')
+            body: JSON.stringify({
+                //id:"",
+                email: "",
+                password: "",
+            })
+           }).then((res) => console.log(res,'ress'))
+           .catch(error => {
+            alert(JSON.stringify(error.response.data)) 
+          })
+         
+            //setTimeout(() => {
+                //
                 //console.log("signed up!")
-            },2500)                       
-            //.catch((err) => console.error(err));
+            //},2500)                       
+       
     };
   
 
