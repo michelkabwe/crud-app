@@ -5,7 +5,7 @@ import '../styles/SignUp.css'
 
 const SignUp = () => {
     const [values, setValues] = useState({
-        //id:"",
+        
         email: "",
         password: "",
     });
@@ -15,7 +15,6 @@ const SignUp = () => {
         setValues({...values, [e.target.name]: e.target.value})
     }
     const handleSubmit = async (e) => {
-        console.log("booboo")
         e.preventDefault();
 
         const headers = {
@@ -24,14 +23,18 @@ const SignUp = () => {
         axios.post("http://localhost:4000/signup/register",values, {
             headers:headers,
             body: JSON.stringify({
-                //id:"",
                 email: "",
                 password: "",
             })
-           }).then((res) => console.log(res,'ress'))
-           .catch(error => {
-            alert(JSON.stringify(error.response.data)) 
-          })
+           })
+           .then((res) => {
+               if(res){
+                   navigate('/Login')
+               }
+           })
+           //.catch(error => {
+            //alert(JSON.stringify(error.response.data)) 
+          //})
          
             //setTimeout(() => {
                 //

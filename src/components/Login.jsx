@@ -9,28 +9,25 @@ import '../styles/SignIn.css'
 const Login = () => {
     const navigate = useNavigate();
     const [values, setValues] = useState({
-        id:"",
+        
         email: "",
         password: "",
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:4000/signin/auth", {
+        axios.post("http://localhost:4000/signin/auth",values, {
                 body: {
-                id: values.id,
-                email: values.email,
-                password: values.password,
+                email:'',
+                password:''
             },
             })
-            .then((res) => 
-              {
-                  let newData = res
-                  console.log(newData)
-               
-                    //const loggedUser = localStorage.getItem('user');
-                    //console.log(loggedUser)
-              }
+            .then((res) => {
+                if(res){
+                    navigate('/Dashboard')
+                }
+            }
+             
             )
             .catch((err) => console.error(err));
     };
