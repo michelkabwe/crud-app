@@ -18,7 +18,7 @@ router.post("/register", [
     }
 
     const { email, password } = req.body;
-    console.log(email, password)
+    
     try {
         const userRef = db.collection('users');
 

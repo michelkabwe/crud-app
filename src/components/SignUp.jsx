@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import '../styles/SignUp.css'
+import Dashboard from './Dashboard';
 
 const SignUp = () => {
     const [values, setValues] = useState({
-        
         email: "",
         password: "",
     });
@@ -42,6 +42,8 @@ const SignUp = () => {
             //},2500)                       
        
     };
+
+
   
 
 
@@ -66,6 +68,7 @@ const SignUp = () => {
                 </input>
                 </label>
                 <input type="submit" />
+                <p>Already have an account? <NavLink to="/Login">Login here!</NavLink> | <NavLink to="/ChangePassword">Forgot your password? </NavLink></p>
             </form>
             </div>
         </div>

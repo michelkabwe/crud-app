@@ -1,4 +1,4 @@
-.sign-in__container {
+.update__container {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -34,12 +34,3 @@ input[type=submit] {
     background-color: #45a049;
   }
 
-  .not-reg__title {
-      
-  }
-
-  #hide-dashboard {
-    display: hidden;
-
-  }
-  

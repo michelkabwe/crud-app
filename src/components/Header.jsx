@@ -10,14 +10,15 @@ const Header = () => {
                     <NavLink to="/"><p>Home</p></NavLink>
                 </li>
                 <li className="nav-li">
-                    <NavLink to="/Login"><p>Login</p></NavLink>
-                </li>
+                    <NavLink to="/Login"><p>Login</p></NavLink> 
+                </li> 
                 <li className="nav-li">
                     <NavLink to="/SignUp"><p>Sign Up</p></NavLink>
-                </li>
+                </li> 
+
+              
             </ul> 
         </div>
     )
 }
-
 export default Header

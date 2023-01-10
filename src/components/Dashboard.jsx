@@ -4,12 +4,11 @@ import React, {useState, useEffect} from 'react'
 import '../styles/Dashboard.css'
 import axios from 'axios'
 import User from './User'
-import { Navigate, useNavigate } from 'react-router-dom'
 
-const Dashboard = () => {
+//import { useNavigate } from 'react-router-dom'
 
-const navigate = useNavigate()
-const [userList, setUserList] = useState([])
+const Dashboard = ({signOut, isLoggedin}) => {
+    const [userList, setUserList] = useState([])
 
   useEffect(() => {
         axios.get("http://localhost:4000/log/userlist")
@@ -20,18 +19,14 @@ const [userList, setUserList] = useState([])
         },[])
 
  
-
-        
-
-
-
-
-
+    
     return (
         <div>
             <h1>Dashboard</h1>
-            <button onClick={() => localStorage.removeItem('token')} className="sign-out__btn">Logout</button>
-
+            {isLoggedin ? 
+            <button onClick={signOut}>Logout</button> 
+            : null }
+            
             {userList.map((user) => {
                 return(
                     <div className="user-info" key={user.id}>
