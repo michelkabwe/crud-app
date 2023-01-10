@@ -1,6 +1,6 @@
-import React ,{ useState , useEffect } from 'react'
+import React ,{ useState } from 'react'
 import axios from 'axios'
-import { useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../styles/Update.css'
 
 const Update = () => {
@@ -10,7 +10,6 @@ const Update = () => {
         password: ""
     });
 
-    const navigate = useNavigate();
     const handleChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
@@ -35,9 +34,6 @@ const Update = () => {
         })
     };
 
-
-
-
     return (
             <div className="update__container">
             <div className="update__title">
@@ -46,17 +42,17 @@ const Update = () => {
             <div className="input-container">
             <form onSubmit={handleSubmit}>
                 <label>email
-                <input type="email"
-                 name="email"
-                 onChange={handleChange}>
-                </input>
+                <input 
+                    type="email"
+                        name="email"
+                        onChange={handleChange} />
                 </label>
 
                 <label>password
-                <input type="password"
-                 name="password"
-                 onChange={handleChange}>
-                </input>
+                <input 
+                    type="password"
+                        name="password"
+                        onChange={handleChange} />
                 </label>
                 <input type="submit" />
                 <p>Already have an account? <NavLink to="/Login">Login here!</NavLink></p>

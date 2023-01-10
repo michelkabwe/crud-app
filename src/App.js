@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css';
 import {
-  BrowserRouter,Routes, Route, useNavigate
+  Routes, Route, useNavigate
 } from "react-router-dom";
 import Header from './components/Header'
 import Home from './components/Home'
@@ -22,21 +22,19 @@ const App = () => {
     navigate('/Login')
     }
   return (
-   
     <div className="App">
-    <Header/>
+    <Header isLoggedin={isLoggedin}/>
     <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={ <Login setIsLoggedin={setIsLoggedin}/>}/>
-          <Route path="/SignUp" element={ <SignUp/> }/>
-          
+          <Route path="/SignUp" element={<HiddenRoute> 
+             <SignUp/> </HiddenRoute> }/>
           <Route path="/Dashboard" 
            element={<HiddenRoute> 
-          <Dashboard signOut={signOut} isLoggedin={isLoggedin}/> </HiddenRoute> }/> 
+          <Dashboard signOut={signOut} isLoggedin={isLoggedin}/></HiddenRoute> }/> 
           <Route path="/Update" element={<Update/>} />
     </Routes>
     </div>
-  
   );
 }
 

@@ -3,9 +3,6 @@ import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignIn.css'
-import Dashboard from './Dashboard';
-
-
 
 const Login = ({setIsLoggedin}) => {
     const navigate = useNavigate();
@@ -24,26 +21,19 @@ const Login = ({setIsLoggedin}) => {
             }),
             })
             .then((res) => {
-                if(res){
-                    console.log(res.status,'status')
+                console.log(res)
                 setValues(res)
                 localStorage.setItem('token-info', JSON.stringify(res.data.token));
                 //console.log(res.data.token)
-                let getToken = localStorage.getItem('token-info')
-                console.log(getToken,'giiiittoekn')
+                let getToken = localStorage.getItem('token-info');
                 if(getToken){
+                    console.log("overhereeee")
                     navigate('/Dashboard')
-
-
                 }
-
-            }
+            
         }).catch((err) => console.error(err));       
     };
-
- 
     return (
-        
         <div className="sign-up__container">
             <div className="sign-up__title">
                 <h1>Sign In</h1>

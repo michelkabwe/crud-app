@@ -1,16 +1,15 @@
-import React,{useState} from 'react'
-//import SignUp from './SignUp'
-import Login from './Login'
+import React from 'react'
+import react, { NavLink } from 'react-router-dom'
+import loginIcon from './../Static/login.png'
 import '../styles/Home.css'
 
 const Home = () => {
- 
-    
-    
     return (
         <div className="home-container">
             <h1>Welcome!</h1>
-            <Login />        
+            <div className="goto-login__wrapper">
+            <NavLink to="/Login">Login Here <img src={loginIcon} className="login-icon"/></  NavLink>        
+            </div>
         </div>
     )
 }

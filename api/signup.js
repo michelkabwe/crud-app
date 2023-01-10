@@ -21,15 +21,14 @@ router.post("/register", [
     
     try {
         const userRef = db.collection('users');
-
-        let user = await userRef.where('email', '==', email).get() //get from database
-        //console.log(user)
+        let user = await userRef.where('email', '==', email).get() 
+        console.log(user,'usssser')
 
         if(!user.empty){
             return res
             .status(400)
             .json({errors: 'This is email has allreadfy been used'});
-        }
+        } 
 
         const id = generatePassword(6,false);
         const salt = await bcrypt.genSalt(10);

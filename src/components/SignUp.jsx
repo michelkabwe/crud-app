@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, NavLink } from 'react-router-dom';
 import '../styles/SignUp.css'
-import Dashboard from './Dashboard';
 
 const SignUp = () => {
     const [values, setValues] = useState({
@@ -16,7 +15,7 @@ const SignUp = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        try {
         const headers = {
                     "Content-Type": "application/json"
         }
@@ -29,17 +28,22 @@ const SignUp = () => {
            })
            .then((res) => {
                if(res){
+                   console.log(res,'ressss')
+                setTimeout(() => {
                    navigate('/Login')
+                },2500)  
                }
            })
-           //.catch(error => {
-            //alert(JSON.stringify(error.response.data)) 
-          //})
+           .catch((error) => alert(error.response.data.errors))
+        } catch(error) {
+            console.log(error.response,'errrr')
+            // code to run if there are any problems
+          } finally {
+            // run this code no matter what the previous outcomes
+          }
+        
          
-            //setTimeout(() => {
-                //
-                //console.log("signed up!")
-            //},2500)                       
+                               
        
     };
 

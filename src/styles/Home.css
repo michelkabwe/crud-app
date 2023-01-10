@@ -7,3 +7,18 @@
     width: 100%;
     background: #f2f2f2;
 }
+
+.goto-login__wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+    width: 100%;
+}
+
+
+.login-icon {
+    width: 25px;
+    height: 25px;
+    
+}

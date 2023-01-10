@@ -43,6 +43,7 @@ router.post("/auth", [
                 email: found.email
             },
         };
+        
         jwt.sign(
             payload,
             config.get('jwtpass'),
