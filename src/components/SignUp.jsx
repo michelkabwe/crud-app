@@ -72,7 +72,7 @@ const SignUp = () => {
                 </input>
                 </label>
                 <input type="submit" />
-                <p>Already have an account? <NavLink to="/Login">Login here!</NavLink> | <NavLink to="/ChangePassword">Forgot your password? </NavLink></p>
+                <p>Already have an account? <NavLink to="/Login">Login here!</NavLink> | <NavLink to="/Update">Forgot your password? </NavLink></p>
             </form>
             </div>
         </div>

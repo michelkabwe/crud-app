@@ -1,5 +1,5 @@
 import React from 'react'
-import react, { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import loginIcon from './../Static/login.png'
 import '../styles/Home.css'
 

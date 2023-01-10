@@ -54,7 +54,8 @@ const Login = ({setIsLoggedin}) => {
                 ></input>
                 </label>
                 <input type="submit" />
-                <p>Not registered? <NavLink to="/SignUp">Sign up here!</NavLink> | Forgot your password?</p>
+                <p>Not registered? <NavLink to="/SignUp">Sign up here!</NavLink> |                 <p>Already have an account? <NavLink to="/Login">Login here!</NavLink> | <NavLink to="/Update">Forgot your password? </NavLink></p>
+</p>
             </form>
             </div>  
         </div>
