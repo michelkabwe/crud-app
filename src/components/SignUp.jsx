@@ -13,9 +13,9 @@ const SignUp = () => {
     const handleChange = (e) => {
         setValues({...values, [e.target.name]: e.target.value})
     }
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {     // handlesubmit för att Registrera en användare
         e.preventDefault();
-        try {
+       
         const headers = {
                     "Content-Type": "application/json"
         }
@@ -34,17 +34,8 @@ const SignUp = () => {
                 },2500)  
                }
            })
-           .catch((error) => alert(error.response.data.errors))
-        } catch(error) {
-            console.log(error.response,'errrr')
-            // code to run if there are any problems
-          } finally {
-            // run this code no matter what the previous outcomes
-          }
+           .catch((error) => alert(error.response.data.errors))  // Om email redan finns i backend kommer felmeddelande "" email allready exists "
         
-         
-                               
-       
     };
 
 

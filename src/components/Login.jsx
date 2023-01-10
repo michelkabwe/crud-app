@@ -11,8 +11,10 @@ const Login = ({setIsLoggedin}) => {
         password: "",
     });
 
+    //Post inloggning med parametrar  email + password som skickas med i body
+
     const handleSubmit = async (e) => {
-        setIsLoggedin(true)
+        setIsLoggedin(true)    // när handlesubmit skickas set state isLoggedIn i App.js till true
         e.preventDefault();
         axios.post("http://localhost:4000/signin/auth",values, {
                 body: JSON.stringify({
@@ -24,11 +26,13 @@ const Login = ({setIsLoggedin}) => {
                 console.log(res)
                 setValues(res)
                 localStorage.setItem('token-info', JSON.stringify(res.data.token));
-                //console.log(res.data.token)
+                //console.log(res.data.token) // Här spara jag token som en variabel, som sett i localstorage...
                 let getToken = localStorage.getItem('token-info');
-                if(getToken){
+                if(getToken){  // om token token finns så navigeras man till Login sidan via navigate...
                     console.log("overhereeee")
                     navigate('/Dashboard')
+                } else { 
+                    alert("Could not login, check Email or Password!")
                 }
             
         }).catch((err) => console.error(err));       
@@ -54,8 +58,7 @@ const Login = ({setIsLoggedin}) => {
                 ></input>
                 </label>
                 <input type="submit" />
-                <p>Not registered? <NavLink to="/SignUp">Sign up here!</NavLink> |                 <p>Already have an account? <NavLink to="/Login">Login here!</NavLink> | <NavLink to="/Update">Forgot your password? </NavLink></p>
-</p>
+                <p>Not registered? <NavLink to="/SignUp">Sign up here!</NavLink> |                 | <NavLink to="/Update">Forgot your password? </NavLink></p>
             </form>
             </div>  
         </div>

@@ -9,15 +9,15 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 
 router.post("/register", [
-        check('email', 'Email is required').isEmail(),
-        check('password', 'Password is required').isLength({min:2})
+        check('email', 'Email is required').isEmail(),  // kollar att email finns 
+        check('password', 'Password is required').isLength({min:2})  // samt lösenord som måste va minst två st tecken
 ], async (req, res, next) => {    
     const errors = validationResult(req) 
     if(!errors.isEmpty()){
        return res.status(400).json({errors: errors.array()})
     }
 
-    const { email, password } = req.body;
+    const { email, password } = req.body;   //request body...
     
     try {
         const userRef = db.collection('users');
@@ -33,9 +33,9 @@ router.post("/register", [
         const id = generatePassword(6,false);
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        //encrypt users password ,package to seo change users password to random charachters
-        //in the database.. to not get hacked
-        await db.collection('users').doc(id).set({
+        //krypetrar användarens lösenord för att öndra användarens lösenor till slumpmässig tecken..
+       
+        await db.collection('users').doc(id).set({  //settar användarens uppfiter nidan i databasen
             id,
             email,
             password: hashedPassword

@@ -17,10 +17,10 @@ router.post("/auth", [
         return res.status(400).json({errors: errors.array()})
     }
 
-    const { email, password} = req.body;
+    const { email, password } = req.body;   //destructure av body.. här hittar jag värderna på email och pass som kommer från post i client.. 
 
     try {
-        const userRef = db.collection('users')
+        const userRef = db.collection('users')   // får genom colletion (lista) med users koolar om email finns.. 
         let user = await userRef.where('email', '==', email).get()
 
         if(user.empty){
@@ -28,11 +28,11 @@ router.post("/auth", [
         }
 
         var found;
-        user.forEach((doc) => {
+        user.forEach((doc) => {   // Loopar  email som finns i users  genom variabel user 
             found = doc.data();
         });
 
-        const matched = await bcrypt.compare(password, found.password)
+        const matched = await bcrypt.compare(password, found.password) //matchar det kryperade lösenordet med användarens lösenord  
         if(!matched){
             return res.status(400).json({errors: 'invalid password'})
         }
@@ -44,7 +44,7 @@ router.post("/auth", [
             },
         };
         
-        jwt.sign(
+        jwt.sign(     // här genereras token ...
             payload,
             config.get('jwtpass'),
             {expiresIn: 40000},
