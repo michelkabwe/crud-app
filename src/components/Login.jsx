@@ -45,9 +45,9 @@ const Login = ({setIsLoggedin}) => {
             <div className="input-container">
             <form onSubmit={handleSubmit}>
                 <label>email
-                <input type="email"
-                name="email"
-                onChange={(e) => setValues({ ...values, email: e.target.value })}
+                     <input type="email"
+                         name="email"
+                            onChange={(e) => setValues({ ...values, email: e.target.value })}
                 ></input>
                 </label>
 

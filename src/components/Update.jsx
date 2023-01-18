@@ -31,7 +31,7 @@ const Update = () => {
             if(res){
                 console.log("password updated")
             }
-        })
+        }).catch((error) => alert(error.response.data.errors)) 
     };
 
     return (
@@ -52,7 +52,7 @@ const Update = () => {
                 <input 
                     type="password"
                         name="password"
-                        onChange={handleChange} />
+                            onChange={handleChange} />
                 </label>
                 <input type="submit" />
                 <p>Already have an account? <NavLink to="/Login">Login here!</NavLink></p>
