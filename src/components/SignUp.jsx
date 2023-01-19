@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, NavLink } from 'react-router-dom';
 import '../styles/SignUp.css'
+import { Icon } from 'react-icons-kit'
+import {eyeDisabled} from 'react-icons-kit/ionicons/eyeDisabled'
+import {eye} from 'react-icons-kit/ionicons/eye'
 
 const SignUp = () => {
 
@@ -19,6 +22,9 @@ const SignUp = () => {
 
     })
 
+    const [showPass, setShowPass] = useState(false)
+    const [showConfirmPass, setShowConfirmPass] = useState(false)
+
 
     const navigate = useNavigate();
     const handleChange = (name, value) => {
@@ -26,8 +32,15 @@ const SignUp = () => {
               
     }
 
+    const toggle = () => {
+        setShowPass(!showPass)
+    }
+    const toggleConfirmPass = () => {
+        setShowConfirmPass(!showConfirmPass)
+    }
 
-    const handleSubmit = async (e) => {     // handlesubmit för att Registrera en användare
+// handlesubmit för att Registrera en användare
+    const handleSubmit = async (e) => {     
         e.preventDefault();
 
         let inputError = {
@@ -69,7 +82,6 @@ const SignUp = () => {
           }
       
          
-      
         const headers = {
                     "Content-Type": "application/json"
         }
@@ -92,8 +104,6 @@ const SignUp = () => {
     };
 
 
-  
-
     return (
         <div className="sign-up__container">
             <div className="sign-up__title">
@@ -103,44 +113,55 @@ const SignUp = () => {
             <form onSubmit={handleSubmit}>
 
                 <label>email
-                <input type="email"
-                name="email"
-                value={values.email}
-                onChange={({ target }) => {
-                    handleChange(target.name, target.value);
-                  }} />
+                <input 
+                type="email"
+                    name="email"
+                        value={values.email}
+                            onChange={({ target }) => {
+                                handleChange(target.name, target.value);
+                            }} />
+
                 <p className="error-message">{error.email}</p>
                 </label>
-
+                <div className="input-wrapper">
                 <label>password
-                <input type="password"
-                 name="password"
-                 value={values.password}
-                 onChange={({ target }) => {
-                    handleChange(target.name, target.value);
-                  }} />
+                <input 
+                 type={(!showPass ? 'password' : 'text' )}
+                    name="password"
+                        value={values.password}
+                            onChange={({ target }) => {
+                                handleChange(target.name, target.value);}}/>
+
+                                {showPass ? 
+                                <span className="eye"><Icon icon={eye} onClick={toggle}/></span> : 
+                                <span className="eye-off" ><Icon icon={eyeDisabled} onClick={toggle} size={26}/></span> }
+                                
                 <p className="error-message">{error.password}</p>
                 </label>
+                </div>
 
+                <div className="input-wrapper">
                 <label>confirm password
-                <input type="password"
-                 name="confirmPassword"
-                 value={values.confirmPassword}
-                 onChange={({ target }) => {
-                    handleChange(target.name, target.value);
-                  }}/>
+                <input 
+                type={(!showConfirmPass ? 'password' : 'text' )}
+                    name="confirmPassword"
+                        value={values.confirmPassword}
+                            onChange={({ target }) => {
+                                handleChange(target.name, target.value);
+                                }}/>
+                                
+                                {showConfirmPass ? 
+                                <span className="eye"><Icon icon={eye} onClick={toggleConfirmPass}/></span>: 
+                                <span className="eye-off"><Icon icon={eyeDisabled} onClick={toggleConfirmPass}size={26}/></span>}
+
                 <p className="error-message">{error.confirmPassword}</p>
                 </label>
+                </div>
 
                 <input type="submit" />
                 <p>Already have an account? <NavLink to="/Login">Login here!</NavLink> | <NavLink to="/Update">Forgot your password? </NavLink></p>
             </form>
             </div>
-
-           <p>confirm Pass: </p> {values.confirmPassword} 
-            
-           <p>values Pass: </p>  {values.password}
-           <p>values Pass: </p>  {values.email}
         </div>
     )
 }
