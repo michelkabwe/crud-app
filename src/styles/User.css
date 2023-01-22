@@ -3,6 +3,7 @@
     background: #f3f3f3;
     margin-bottom: 1rem;
     align-items: center;
+    width: 100%;
 }
 
 .user-email {
@@ -14,4 +15,17 @@
     border: solid 1px #c2bcbc;
     margin-left: 2rem;
     height:24px;
+}
+
+/*break points */
+
+@media screen and (max-width:350px){
+
+    .user-info {
+        flex-direction: column;
+    }
+    
+    .delete-btn {
+        margin-left: 0rem;
+    }
 }

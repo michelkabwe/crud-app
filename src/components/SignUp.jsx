@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, NavLink } from 'react-router-dom';
 import '../styles/SignUp.css'
@@ -29,12 +29,12 @@ const SignUp = () => {
     const navigate = useNavigate();
     const handleChange = (name, value) => {
         setValues({...values, [name]: value}) 
-              
     }
 
     const toggle = () => {
         setShowPass(!showPass)
     }
+
     const toggleConfirmPass = () => {
         setShowConfirmPass(!showConfirmPass)
     }
@@ -133,15 +133,15 @@ const SignUp = () => {
                                 handleChange(target.name, target.value);}}/>
 
                                 {showPass ? 
-                                <span className="eye"><Icon icon={eye} onClick={toggle}/></span> : 
-                                <span className="eye-off" ><Icon icon={eyeDisabled} onClick={toggle} size={26}/></span> }
+                                <span className="eye"><Icon icon={eye} onClick={toggle} size={22}/></span> : 
+                                <span className="eye-off" ><Icon icon={eyeDisabled} onClick={toggle} size={22}/></span> }
                                 
                 <p className="error-message">{error.password}</p>
                 </label>
                 </div>
 
                 <div className="input-wrapper">
-                <label>confirm password
+                <label >confirm password
                 <input 
                 type={(!showConfirmPass ? 'password' : 'text' )}
                     name="confirmPassword"
@@ -151,8 +151,8 @@ const SignUp = () => {
                                 }}/>
                                 
                                 {showConfirmPass ? 
-                                <span className="eye"><Icon icon={eye} onClick={toggleConfirmPass}/></span>: 
-                                <span className="eye-off"><Icon icon={eyeDisabled} onClick={toggleConfirmPass}size={26}/></span>}
+                                <span className="eye"><Icon icon={eye} onClick={toggleConfirmPass} size={22}/></span>: 
+                                <span className="eye-off"><Icon icon={eyeDisabled} onClick={toggleConfirmPass}size={22}/></span>}
 
                 <p className="error-message">{error.confirmPassword}</p>
                 </label>

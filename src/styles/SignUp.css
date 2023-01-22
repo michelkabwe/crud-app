@@ -57,3 +57,18 @@ input[type=submit] {
 
   }
 
+/* Break points 
+
+@media screen and (max-width:350px){
+  .nav-list {
+    display: inline-block !important;
+  }
+
+}
+
+@media screen and (max-width:900px){
+  .nav-list {
+    width: 100%;
+  }
+
+}*/

@@ -35,7 +35,7 @@ const Login = ({setIsLoggedin}) => {
                     alert("Could not login, check Email or Password!")
                 }
             
-        }).catch((err) => console.error(err));       
+        }).catch((error) => alert(error.response.data.errors))      
     };
     return (
         <div className="sign-up__container">
